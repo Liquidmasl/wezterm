@@ -45,9 +45,9 @@ support, so it needs `CLAUDE_CODE_FORCE_TERMINAL_IMAGES=1`.
 
 **Only set it when running this build.** In stock WezTerm, Claude Code would
 send placeholders the terminal can't draw, and images turn into garbage
-characters. Plan: the install step drops a marker file
-`placeholders-daily` next to the binaries, and the tracked `wezterm.lua` sets
-the variable only if that file exists:
+characters. The install step drops a marker file `placeholders-daily` next to the
+binaries, and the tracked `wezterm.lua` (dotfiles) sets the variable only if
+that file exists:
 
 ```lua
 -- in dotfiles wezterm.lua (tracked, harmless on machines without this build)
@@ -65,11 +65,14 @@ end
 
 ## Linux (Pop!_OS desktop)
 
-Status: planned, not set up yet.
+Status: set up 2026-10-13. The guard is in the dotfiles `wezterm.lua`, and the
+marker file holds the installed commit (`cat ~/.local/opt/wezterm-placeholders/placeholders-daily`).
 
 - Worktree `~/repos/wezterm-daily` on this branch. `~/repos/wezterm-pr7924`
   stays on `fix-placeholder-retransmit` for PR work.
 - Build: `cargo build --release -p wezterm-gui -p wezterm -p wezterm-mux-server`
+  (here with `CARGO_TARGET_DIR=~/repos/wezterm-pr7924/target`, shared with
+  the PR checkout so builds stay incremental; safe because we copy the binaries)
 - Install: **copy** (don't link `target/`, or a rebuild or `cargo clean` pulls
   the binary out from under the running terminal) `wezterm`, `wezterm-gui`,
   `wezterm-mux-server` to a fresh `~/.local/opt/wezterm-placeholders.new/`, add
