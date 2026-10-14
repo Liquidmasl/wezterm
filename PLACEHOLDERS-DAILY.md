@@ -34,7 +34,7 @@ Merge conflict: stop and resolve by hand. Don't let a script guess.
 
 Once #7924 lands in the nightly: switch back to the packaged nightly (apt
 `wezterm-nightly` on Linux, brew on the Mac), remove the install below (on the
-Mac: delete `WezTerm Daily.app` and the `(\\.daily)?` in Karabiner) and the
+Mac: delete `WezTerm Daily.app` and the `(\.daily)?` in Karabiner) and the
 `wezterm.lua` guard, delete this branch, and ask Claude Code to allowlist WezTerm
 so `CLAUDE_CODE_FORCE_TERMINAL_IMAGES` isn't needed.
 
